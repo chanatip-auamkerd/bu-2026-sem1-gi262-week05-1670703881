@@ -38,12 +38,18 @@ namespace Assignment
             {
                 for (int j = 0; j < numbers.Length - i - 1; j++)
                 {
-                    if (numbers[j] > numbers[j + 1])
+                    if (numbers[j] < numbers[j + 1])
                     {
-                        (numbers[j], numbers[j + 1]) = (numbers[j+1], numbers[j]);
+                        (numbers[j], numbers[j + 1]) = (numbers[j + 1], numbers[j]);
                     }
                 }
             }
+
+            for (int i = 0; i < numbers.Length; i++)
+            {
+                Console.WriteLine(numbers[i]);
+            }
+
             return numbers;
         }
 
@@ -69,22 +75,129 @@ namespace Assignment
 
         public int[] AS01_SelectionSortDescending(int[] numbers)
         {
+            if (numbers == null || numbers.Length <= 1)
+            {
+                if (numbers != null && numbers.Length == 1)
+                {
+                    Console.WriteLine(numbers[0]);
+                }
+                return numbers;
+            }
+            for (int i = 0; i < numbers.Length - 1; i++)
+            {
+                int maxIndex = i;
+                for (int j = i + 1; j < numbers.Length; j++)
+                {
+                    if (numbers[j] > numbers[maxIndex])
+                    {
+                        maxIndex = j;
+                    }
+                }
+                int temp = numbers[i];
+                numbers[i] = numbers[maxIndex];
+                numbers[maxIndex] = temp;
+            }
+            for (int i = 0; i < numbers.Length; i++)
+            {
+                Console.WriteLine(numbers[i]);
+            }
+
             return numbers;
         }
 
         public int[] AS02_BubbleSortDescending(int[] numbers)
         {
+            if (numbers == null || numbers.Length <= 1)
+            {
+                if (numbers != null && numbers.Length == 1)
+                {
+                    Console.WriteLine(numbers[0]);
+                }
+                return numbers;
+            }
+            for (int i = 0; i < numbers.Length - 1; i++)
+            {
+                for (int j = 0; j < numbers.Length - i - 1; j++)
+                {
+                    if (numbers[j] < numbers[j + 1])
+                    {
+                        int temp = numbers[j];
+                        numbers[j] = numbers[j + 1];
+                        numbers[j + 1] = temp;
+                    }
+                }
+            }
+            for (int i = 0; i < numbers.Length; i++)
+            {
+                Console.WriteLine(numbers[i]);
+            }
+
             return numbers;
         }
 
         public int[] AS03_InsertionSortDescending(int[] numbers)
         {
+            if (numbers == null || numbers.Length <= 1)
+            {
+                if (numbers != null && numbers.Length == 1)
+                {
+                    Console.WriteLine(numbers[0]);
+                }
+                return numbers;
+            }
+            for (int i = 1; i < numbers.Length; i++)
+            {
+                int key = numbers[i];
+                int j = i - 1;
+
+                while (j >= 0 && numbers[j] < key)
+                {
+                    numbers[j + 1] = numbers[j];
+                    j--;
+                }
+
+                numbers[j + 1] = key;
+            }
+            for (int i = 0; i < numbers.Length; i++)
+            {
+                Console.WriteLine(numbers[i]);
+            }
+
             return numbers;
         }
 
         public int AS04_FindTheSecondLargestNumber(int[] numbers)
         {
-            return 0;
+            if (numbers == null || numbers.Length < 2)
+            {
+                return 0;
+            }
+            for (int i = 0; i < numbers.Length - 1; i++)
+            {
+                for (int j = 0; j < numbers.Length - i - 1; j++)
+                {
+                    if (numbers[j] < numbers[j + 1])
+                    {
+                        int temp = numbers[j];
+                        numbers[j] = numbers[j + 1];
+                        numbers[j + 1] = temp;
+                    }
+                }
+            }
+            int highest = numbers[0];
+            int secondLargest = highest;
+
+            for (int i = 1; i < numbers.Length; i++)
+            {
+                if (numbers[i] < highest)
+                {
+                    secondLargest = numbers[i];
+                    break;
+                }
+            }
+
+            Console.WriteLine(secondLargest);
+            return secondLargest;
         }
 
         #endregion
